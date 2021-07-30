@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+/*
+COLORES:
+morado:#52006A
+granate:#CD113B
+naranja: #FF7600
+mostaza: #FFA900
+*/
+*{
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+    color:#FF7600;
+}
+
+body{
+    background-color: #52006A;
+}
+
+main {
+    max-width: 800px;
+    width: 90%;
+    margin: auto;
+    padding: 40px;
+}
