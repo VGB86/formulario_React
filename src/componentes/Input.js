@@ -1,9 +1,9 @@
 import React from 'react';
 import {Label, Input, GrupoInput, LeyendaError, IconoValidacion} from '../elementos/Formularios';
-import { faCheckCircle} from '@fortawesome/free-solid-svg-icons'
+import { faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 
 
-const ComponenteInput = ({estado, cambiarEstado, tipo, label,placeholder, name, leyendaError, expresionRegular}) => {
+const ComponenteInput = ({estado, cambiarEstado, tipo, label,placeholder, name, leyendaError, expresionRegular, funcion}) => {
     //Creamos un componente para reutilizar 
 
     const onChange = (event) =>{
@@ -21,12 +21,16 @@ const ComponenteInput = ({estado, cambiarEstado, tipo, label,placeholder, name, 
             }
             
         }
+
+        if(funcion){
+            funcion();
+        }
     };
 
 
     return (
         <div>
-          <Label htmlFor={name} valido={estado.valido}> {label}</Label>
+          <Label htmlFor={name} valido = {estado.valido}> {label}</Label>
           <GrupoInput>
               <Input 
                 type ={tipo}
@@ -38,9 +42,12 @@ const ComponenteInput = ({estado, cambiarEstado, tipo, label,placeholder, name, 
                 onBlur = {validacion} //click fuera del input
                 valido = {estado.valido}
                />  
-              <IconoValidacion icon={faCheckCircle}/>
+              <IconoValidacion 
+                    icon = {estado.valido === 'true' ? faCheckCircle : faTimesCircle}
+                    valido = {estado.valido}
+              />
           </GrupoInput>
-          <LeyendaError>{leyendaError}</LeyendaError>
+          <LeyendaError  valido = {estado.valido}>{leyendaError}</LeyendaError>
        </div>
     );
 }

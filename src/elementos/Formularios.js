@@ -3,15 +3,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 // eslint-disable-next-line 
 const colores = {
-    borde : "#F8485E",
+    borde : "#FF7600",
     error : "#FFD523",
-    exito: "#FFA900"
+    error2: "#FA1E0E",
+    exito: "#50CB93"
 }
 
 const Formulario = styled.form`
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap : 20px;
+    color:#FF7600;
 
     @media (max-width: 800px){
         grid-template-columns: 1fr;
@@ -23,10 +25,10 @@ const Label = styled.label`
     font-weight: 700;
     padding:10px;
     min-height: 40px;
-    cursor: pointer
-    
-    ${props => props.valido === 'false' && css `
-        color: ${colores.error};
+    cursor: pointer;
+        
+    ${props=> props.valido === 'false' && css`
+       color:${colores.error};
     `}
 `;
 
@@ -44,6 +46,7 @@ const Input = styled.input`
     padding: 0 40px 0 10px;
     transition: .3s ease all;
     border: 3px solid transparent;
+    color:#082032;
 
     &:focus{
         border:3px solid ${colores.borde};
@@ -56,7 +59,7 @@ const Input = styled.input`
     `}
 
     ${props => props.valido === 'false' && css `
-        border: 3px solid ${colores.error};
+        border: 3px solid ${colores.error} !important;
     `}
 `; 
 
@@ -65,6 +68,14 @@ const LeyendaError = styled.p`
     margin-bottom:0;
     color: ${colores.error};
     display:none;
+
+    ${props => props.valido === 'true' && css `
+        display:none;
+    `}
+
+    ${props => props.valido === 'false' && css `
+        display:block;
+    `}
 `;
 
 const IconoValidacion = styled(FontAwesomeIcon)`
@@ -74,6 +85,16 @@ const IconoValidacion = styled(FontAwesomeIcon)`
     z-index:100;
     font-size:16px;
     opacity:0;
+    
+    ${props => props.valido === 'false' && css `
+        opacity:1;
+        color: ${colores.error2}
+    `}
+
+    ${props => props.valido === 'true' && css `
+        opacity:1;
+        color: ${colores.exito}
+    `}
 `;
 
 const ContenedorTerminos = styled.div`
@@ -82,6 +103,10 @@ const ContenedorTerminos = styled.div`
     input{
         margin-right:10px;
     }
+
+    @media (max-width:800px){
+        grid-column: span 1;
+    }
 `;
 
 const ContenedorBotonCentrado = styled.div`
@@ -89,6 +114,10 @@ const ContenedorBotonCentrado = styled.div`
     flex-direction:column;
     align-items:center;
     grid-column: span 2;
+
+    @media (max-width:800px){
+        grid-column: span 1;
+    }
 `;
 
 const Boton = styled.button`
@@ -111,7 +140,7 @@ const Boton = styled.button`
 const MensajeExito = styled.p`
     font-size:14px;
     color:{color.exito};
-    display:none
+    
 `;
 
 const MensajeError = styled.div`
@@ -121,9 +150,14 @@ const MensajeError = styled.div`
     padding:0px 15px;
     border-radius:3px;
     grid-column:span 2;
+
     p{
         margin:0;
+        color: ${colores.error2}
     }
+
+    
+
 `;
 
 export {
